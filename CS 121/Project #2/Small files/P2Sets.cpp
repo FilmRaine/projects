@@ -20,7 +20,7 @@ struct Node{
 
 void intersection(Node*, Node*);// find intersection betweeen linked lists
 void Union(Node*, Node*); // finds union between linked lists
-void printlist(Node*&); // displays linked list
+void printlist(Node*); // displays linked list
 void readfile(Node*&, string); // reads in file 
 void wordcheck(Node*); //check for duplicate strings in file
 
@@ -28,14 +28,14 @@ void wordcheck(Node*); //check for duplicate strings in file
 
 
 int main(){
-    Node* L1Head = NULL; //creating heads for list nodes. 
-    Node* L2Head = NULL;
+    Node* S1Head = NULL; //creating heads for list nodes. 
+    Node* S2Head = NULL;
     string x = "s1.txt";
     string y = "s2.txt";
-    readfile(L1Head, x);
-    readfile(L2Head, y);
-    printlist(L1Head);
-    printlist(L2Head);
+    readfile(S1Head, x);
+    readfile(S2Head, y);
+    printlist(S1Head);
+    printlist(S2Head);
 
 
 return 0;
@@ -44,10 +44,10 @@ return 0;
 
 void readfile(Node*& head, string z){
     string filename = z;
-    ifstream infile(filename);
+    ifstream infile;
     string temp;
     infile.open(filename.c_str());
-
+    
  while(infile >> temp){
     Node* p = new Node;
     p-> data = temp;
@@ -57,7 +57,7 @@ void readfile(Node*& head, string z){
     infile.close();
 }
 
-void printlist(Node* &head){
+void printlist(Node* head){
   
    if(head == NULL){
     cout << "list is empty.\n" << endl;
@@ -69,5 +69,5 @@ void printlist(Node* &head){
        cout << p-> data << endl;
         p = p-> next;
     }
-    cout << "Code ran :)" << endl;
+    cout << "Code ran :)\n\n" << endl;
 }
