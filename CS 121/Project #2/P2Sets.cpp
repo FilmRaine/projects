@@ -26,6 +26,10 @@ void printlist(Node*); // displays full list
 void readfile(Node*&, string); // reads in file 
 void wordcheck(Node*&); //check for duplicate strings in file
 
+void appendtolist(Node*&, string);
+void checklist(Node*&, string);
+void duplicheck(Node*&, string);
+bool searchlist(Node*&, string);
 
 
 
@@ -38,8 +42,8 @@ int main(){
 
     readfile(S1Head, x); //reads in file
     readfile(S2Head, y);
-    wordcheck(S1Head);
-    wordcheck(S2Head);
+    //wordcheck(S1Head);
+   // wordcheck(S2Head);
     printlist(S1Head); // prints full list
     printlist(S2Head);
    
@@ -60,18 +64,18 @@ return 0;
 }
 
 
-void readfile(Node*& head, string z){
+void readfile(Node* &head, string z){
 
-    string filename = z;
-    ifstream infile;
-    string temp;
-    infile.open(filename.c_str());
+string filename = z;
+ifstream infile;
+string temp;
+infile.open(filename.c_str());
     
  while(infile >> temp){
-    Node* p = new Node;
-    p-> data = temp;
-    p-> next = head;
-    head = p;
+
+    if(!searchlist(head, temp)){   
+    appendtolist(head, temp);
+        }
     }
     infile.close();
 }
@@ -91,3 +95,29 @@ void printlist(Node* head){
     cout << "Code ran :)\n\n" << endl;
 }
 
+void appendtolist(Node*& head, string newData){
+    Node* p = new Node;
+
+    p-> data = newData;
+    p->next = head;
+    if(head == NULL){
+        head = p;
+    }else{
+        p-> next = head;
+    }
+}
+
+
+bool searchlist(Node*& head, string search){
+    Node* p = head;
+
+    while(p != NULL){
+        if(p->data == search){
+            return true;
+        
+        }
+        p=p->next;
+        
+    } 
+    return false;
+}
