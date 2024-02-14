@@ -20,43 +20,39 @@ struct Node{
 
 
 //Prototypes
-void findintersection(Node*, Node*);// find intersection betweeen linked lists
-void findUnion(Node*, Node*); // finds union between linked lists
+Node* findintersection(Node*&, Node*&);// find intersection betweeen linked lists
+Node* addlists(Node*&, Node*&); // finds union between linked lists
 void printlist(Node*); // displays full list 
 void readfile(Node*&, string); // reads in file 
-void wordcheck(Node*&); //check for duplicate strings in file
-
+Node* findUnion(Node*&, Node*&);
+string alphanum(string);
+bool isAlpha(char);
 void appendtolist(Node*&, string);
 void checklist(Node*&, string);
-void duplicheck(Node*&, string);
 bool searchlist(Node*&, string);
+void removeNode(Node*&, string);
 
 
 
 int main(){
     Node* S1Head = NULL; //creating heads for list nodes. 
     Node* S2Head = NULL;
-    string x = "s1.txt";
-    string y = "s2.txt";
-   
-
+    string x = "L1.txt";
+    string y = "L2.txt";
+    
     readfile(S1Head, x); //reads in file
     readfile(S2Head, y);
-    //wordcheck(S1Head);
-   // wordcheck(S2Head);
-    printlist(S1Head); // prints full list
-    printlist(S2Head);
-   
-   // Node* Intersect = findintersection(S1Head, S2Head);
-   // Node* Union = findUnion(S1Head,S2Head);
     
-
-   cout << "Union: " << endl;
-  // printlist(Union);
+    Node* intersect = findintersection(S1Head, S2Head);
+    Node* Union = addlists(S1Head, S2Head);
+    findUnion(intersect, Union);    
+    
+   cout << "\nUnion: " << endl;
+    printlist(Union);
    cout << endl;
 
    cout << "Intersection: " << endl;
-  // printlist(Intersect);
+   printlist(intersect);
    cout << endl;
 
 
@@ -69,15 +65,33 @@ void readfile(Node* &head, string z){
 string filename = z;
 ifstream infile;
 string temp;
+
 infile.open(filename.c_str());
     
  while(infile >> temp){
-
+    temp = alphanum(temp);
     if(!searchlist(head, temp)){   
     appendtolist(head, temp);
         }
     }
     infile.close();
+}
+
+string alphanum(string stringMem){
+    string buffer;
+    for(char c : stringMem){
+        if(isAlpha(c)){
+            buffer += c;
+        }
+    }
+    return buffer;
+}
+
+bool isAlpha(char temp){
+    if((temp >= 'a' && temp <= 'z') || (temp >= 'A' && temp <= 'Z') || temp == '-'  || temp == '\''){
+        return true;
+    }
+    return false;
 }
 
 void printlist(Node* head){
@@ -92,7 +106,6 @@ void printlist(Node* head){
        cout << p-> data << endl;
         p = p-> next;
     }
-    cout << "Code ran :)\n\n" << endl;
 }
 
 void appendtolist(Node*& head, string newData){
@@ -104,9 +117,9 @@ void appendtolist(Node*& head, string newData){
         head = p;
     }else{
         p-> next = head;
+        head = p;
     }
 }
-
 
 bool searchlist(Node*& head, string search){
     Node* p = head;
@@ -120,4 +133,74 @@ bool searchlist(Node*& head, string search){
         
     } 
     return false;
+}
+
+Node* findintersection(Node*& S1Head, Node*& S2Head){
+    Node* intersect = NULL;
+    string search;
+    Node* p = S1Head;
+
+    while(p != NULL){
+        search = p -> data;
+        if(searchlist(S2Head, search)){
+            appendtolist(intersect, search);
+        }
+        p = p-> next; 
+    }
+    return intersect;
+}
+
+Node* addlists(Node*& S1Head, Node*& S2Head){
+    Node* Union = NULL;
+    Node* p = S1Head;
+
+    while(p != NULL){
+        appendtolist(Union, p -> data);
+        p = p-> next;
+    }
+    
+    p = S2Head;
+
+    while(p != NULL){
+        appendtolist(Union, p-> data);
+        p = p-> next;
+    }
+    return Union;
+}
+
+void removeNode(Node*& head, string search){
+    Node* p = head;
+
+    if(p -> data == search){
+        head = p -> next;
+
+        p-> next = NULL;
+        delete(p);
+        return;
+    }
+
+    while(p != NULL){
+        Node* mNode = p-> next;
+        if(mNode == NULL){
+            return;
+        }
+        if(mNode -> data == search){
+            p -> next = mNode -> next;
+            mNode -> next = NULL;
+            delete(mNode);
+            return;
+        }
+        p=p-> next;
+    }
+}
+
+Node* findUnion(Node*& intersect, Node*& Union){
+    Node* p = intersect;
+    string search;
+    while(p != NULL){
+        search = p-> data;
+        removeNode(Union, search);
+        p=p-> next;
+    }
+    return Union;
 }
