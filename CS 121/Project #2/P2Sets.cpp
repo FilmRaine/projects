@@ -28,8 +28,7 @@ Node* findUnion(Node*&, Node*&);
 string alphanum(string);
 bool isAlpha(char);
 void appendtolist(Node*&, string);
-void checklist(Node*&, string);
-bool searchlist(Node*&, string);
+bool isMember(Node*&, string);
 void removeNode(Node*&, string);
 
 
@@ -70,7 +69,7 @@ infile.open(filename.c_str());
     
  while(infile >> temp){
     temp = alphanum(temp);
-    if(!searchlist(head, temp)){   
+    if(!isMember(head, temp)){   
     appendtolist(head, temp);
         }
     }
@@ -121,7 +120,7 @@ void appendtolist(Node*& head, string newData){
     }
 }
 
-bool searchlist(Node*& head, string search){
+bool isMember(Node*& head, string search){
     Node* p = head;
 
     while(p != NULL){
@@ -142,7 +141,7 @@ Node* findintersection(Node*& S1Head, Node*& S2Head){
 
     while(p != NULL){
         search = p -> data;
-        if(searchlist(S2Head, search)){
+        if(isMember(S2Head, search)){
             appendtolist(intersect, search);
         }
         p = p-> next; 
@@ -153,6 +152,7 @@ Node* findintersection(Node*& S1Head, Node*& S2Head){
 Node* addlists(Node*& S1Head, Node*& S2Head){
     Node* Union = NULL;
     Node* p = S1Head;
+
 
     while(p != NULL){
         appendtolist(Union, p -> data);
@@ -171,6 +171,10 @@ Node* addlists(Node*& S1Head, Node*& S2Head){
 void removeNode(Node*& head, string search){
     Node* p = head;
 
+if(head == NULL){
+    cout << "Head is NULL.\n" << endl;
+    return;
+   }
     if(p -> data == search){
         head = p -> next;
 
@@ -197,6 +201,7 @@ void removeNode(Node*& head, string search){
 Node* findUnion(Node*& intersect, Node*& Union){
     Node* p = intersect;
     string search;
+
     while(p != NULL){
         search = p-> data;
         removeNode(Union, search);
