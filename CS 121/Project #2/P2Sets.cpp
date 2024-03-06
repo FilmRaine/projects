@@ -3,7 +3,7 @@
  * CS 121.Bolden.........Jackson Staples
  * 2/12/2024.............stap2053@vandals.uidaho.edu
  *
- * Brief description of program and objective.
+ * Program designed to take two text files as input for data in a linked list, then print the intersection and union of both the linked lists.
  *---------------------------------------------------------------------
  */
 
@@ -13,7 +13,7 @@
 using namespace std;
 
 
-struct Node{
+struct Node{ // Struct declaration
     string data;
     Node* next;
 };
@@ -21,34 +21,42 @@ struct Node{
 
 //Prototypes
 Node* findintersection(Node*&, Node*&);// find intersection betweeen linked lists
-Node* addlists(Node*&, Node*&); // finds union between linked lists
+Node* addlists(Node*&, Node*&); // Combines two linked lists
 void printlist(Node*); // displays full list 
 void readfile(Node*&, string); // reads in file 
-Node* findUnion(Node*&, Node*&);
-string alphanum(string);
-bool isAlpha(char);
-void appendtolist(Node*&, string);
-void checklist(Node*&, string);
-bool searchlist(Node*&, string);
-void removeNode(Node*&, string);
+Node* findUnion(Node*&, Node*&); // Finds union between linked lists
+string alphanum(string); // Removes all aplhanumerical characters, except hypens and single apostrophes. 
+bool isAlpha(char); 
+void appendtolist(Node*&, string); // adds string as data memeber of linked list
+bool searchlist(Node*&, string); // Checks if string passed to function is a member of data from the list passed to function.
+void removeNode(Node*&, string); // Removes node if data of passed function matches string passed to function.
 
 
 
 int main(){
-    Node* S1Head = NULL; //creating heads for list nodes. 
-    Node* S2Head = NULL;
-    string x = "L1.txt";
+   // Initialize heads for list nodes. 
+    Node* L1Head = NULL; 
+    Node* L2Head = NULL;
+
+ 
+   // assigns names of input files
+    string x = "L1.txt"; 
     string y = "L2.txt";
     
-    readfile(S1Head, x); //reads in file
-    readfile(S2Head, y);
+    //reads in file
+    readfile(L1Head, x); 
+    readfile(L2Head, y);
     
-    Node* intersect = findintersection(S1Head, S2Head);
-    Node* Union = addlists(S1Head, S2Head);
+    // Passes in L1 and L2
+    Node* intersect = findintersection(L1Head, L2Head); 
+    Node* Union = addlists(L1Head, L2Head);
+
+    // Passes in intersect and Union
     findUnion(intersect, Union);    
     
+    // Print lists
    cout << "\nUnion: " << endl;
-    printlist(Union);
+    printlist(Union); 
    cout << endl;
 
    cout << "Intersection: " << endl;
@@ -62,7 +70,7 @@ return 0;
 
 void readfile(Node* &head, string z){
 
-string filename = z;
+string filename = z; 
 ifstream infile;
 string temp;
 
@@ -70,6 +78,7 @@ infile.open(filename.c_str());
     
  while(infile >> temp){
     temp = alphanum(temp);
+    // Adds string to list if not already a member
     if(!searchlist(head, temp)){   
     appendtolist(head, temp);
         }
@@ -79,15 +88,17 @@ infile.open(filename.c_str());
 
 string alphanum(string stringMem){
     string buffer;
+    
+    // Iterate through list
     for(char c : stringMem){
-        if(isAlpha(c)){
-            buffer += c;
+        if(isAlpha(c)){ 
+            buffer += c; // Writes strings to buffer ignoring alphanumerics
         }
     }
     return buffer;
 }
 
-bool isAlpha(char temp){
+bool isAlpha(char temp){ // Returns true value if char is alpha, hyphen or single apostrophe
     if((temp >= 'a' && temp <= 'z') || (temp >= 'A' && temp <= 'Z') || temp == '-'  || temp == '\''){
         return true;
     }
@@ -100,7 +111,7 @@ void printlist(Node* head){
     cout << "list is empty.\n" << endl;
     return;
    }
-   
+   // start at front of list
     Node* p = head;    
     while(p != NULL){
        cout << p-> data << endl;
@@ -109,11 +120,13 @@ void printlist(Node* head){
 }
 
 void appendtolist(Node*& head, string newData){
+   // Start of list
     Node* p = new Node;
+
 
     p-> data = newData;
     p->next = head;
-    if(head == NULL){
+    if(head == NULL){ 
         head = p;
     }else{
         p-> next = head;
@@ -122,27 +135,29 @@ void appendtolist(Node*& head, string newData){
 }
 
 bool searchlist(Node*& head, string search){
+   // start of list
     Node* p = head;
 
-    while(p != NULL){
-        if(p->data == search){
+    // iterate through list
+    while(p != NULL){ 
+        if(p->data == search){ // Checks if data was already in list
             return true;
-        
         }
-        p=p->next;
-        
+            p=p->next; 
+
     } 
     return false;
 }
 
-Node* findintersection(Node*& S1Head, Node*& S2Head){
+Node* findintersection(Node*& L1Head, Node*& L2Head){
     Node* intersect = NULL;
     string search;
-    Node* p = S1Head;
+    Node* p = L1Head;
 
     while(p != NULL){
         search = p -> data;
-        if(searchlist(S2Head, search)){
+        // if string is in L1 & L2, add to intersect
+        if(searchlist(L2Head, search)){
             appendtolist(intersect, search);
         }
         p = p-> next; 
@@ -150,18 +165,18 @@ Node* findintersection(Node*& S1Head, Node*& S2Head){
     return intersect;
 }
 
-Node* addlists(Node*& S1Head, Node*& S2Head){
+Node* addlists(Node*& L1Head, Node*& L2Head){
     Node* Union = NULL;
-    Node* p = S1Head;
+    Node* p = L1Head;
 
-    while(p != NULL){
+    while(p != NULL){ // Adds data from L1 to Union
         appendtolist(Union, p -> data);
         p = p-> next;
     }
     
-    p = S2Head;
+    p = L2Head; 
 
-    while(p != NULL){
+    while(p != NULL){ // Adds data from L2 to Union
         appendtolist(Union, p-> data);
         p = p-> next;
     }
@@ -169,35 +184,41 @@ Node* addlists(Node*& S1Head, Node*& S2Head){
 }
 
 void removeNode(Node*& head, string search){
+    // Beginning of list
     Node* p = head;
 
+    // Check first member of list
     if(p -> data == search){
+        // Move to next node
         head = p -> next;
-
+        // set previous node to NULL
         p-> next = NULL;
         delete(p);
         return;
     }
 
+    // Check each member 
     while(p != NULL){
         Node* mNode = p-> next;
         if(mNode == NULL){
             return;
         }
+
         if(mNode -> data == search){
+            // Move to next node, set previous to NULL 
             p -> next = mNode -> next;
             mNode -> next = NULL;
             delete(mNode);
-            return;
+            return; // Exits loop to prevent removing multiple of same string
         }
         p=p-> next;
     }
 }
 
-Node* findUnion(Node*& intersect, Node*& Union){
+Node* findUnion(Node*& intersect, Node*& Union){ 
     Node* p = intersect;
     string search;
-    while(p != NULL){
+    while(p != NULL){ // Iterate through Union, removing single nodes if they match 1 intersect
         search = p-> data;
         removeNode(Union, search);
         p=p-> next;
