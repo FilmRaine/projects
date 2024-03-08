@@ -48,7 +48,7 @@ int main(){
             s.Push(c); // push operator onto stack
         }
         else if(IsClose(c)){ 
-            if(!s.IsEmpty() && !IsOpen(s.Peek()) ){ // if stack is not empty, and top of stack is not open parenthesis, add to postfix and pop.
+            while(!IsOpen(c) && !IsOpen(s.Peek()) ){ // if stack is not empty, and top of stack is not open parenthesis, add to postfix and pop.
             postfix += s.Pop();
         }
         s.Pop(); // removes the matching open parenthesis
@@ -57,8 +57,9 @@ int main(){
     while(!s.IsEmpty()){
         postfix += s.Pop(); //removes remaining operators
     }
-
+    
     cout << postfix << endl; // print postfix!
+    postfix = ' ';
     }
 
 };

@@ -1,0 +1,22 @@
+Script started on 2024-03-08 01:41:58-08:00 [TERM="xterm-256color" TTY="/dev/pts/6" COLUMNS="64" LINES="9"]
+[?2004h]0;jack@LAPTOP-44M5AKHT: ~/projects/projects-1/Stacks[01;32mjack@LAPTOP-44M5AKHT[00m:[01;34m~/projects/projects-1/Stacks[00m$ a[K./a.out
+[?2004lenter your phrase goober and hit enter. 
+Or, type 'quit' and hit enter if you would like to exit the program. 
+(2 + 4) * 3
+24+3*
+enter your phrase goober and hit enter. 
+Or, type 'quit' and hit enter if you would like to exit the program. 
+2 + ((5) * 3)
+ 253*+
+enter your phrase goober and hit enter. 
+Or, type 'quit' and hit enter if you would like to exit the program. 
+2 * ((3 + 4 * 7) / 3 + 2)
+ 2347*+3/2+*
+enter your phrase goober and hit enter. 
+Or, type 'quit' and hit enter if you would like to exit the program. 
+quit
+ 
+[?2004h]0;jack@LAPTOP-44M5AKHT: ~/projects/projects-1/Stacks[01;32mjack@LAPTOP-44M5AKHT[00m:[01;34m~/projects/projects-1/Stacks[00m$ exit
+[?2004lexit
+
+Script done on 2024-03-08 01:42:22-08:00 [COMMAND_EXIT_CODE="0"]
