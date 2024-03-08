@@ -1,4 +1,11 @@
-// stack.cpp
+/*stack.cpp 
+ *
+ * CS 121.Bolden...........Jackson Staples
+ * 3/8/2024 .................stap2053@vandals.uidaho.edu
+ *
+ * Application of Stack class 
+ *---------------------------------------------------------------------
+*/ 
 
 
 #include <iostream>
@@ -18,7 +25,7 @@ void Stack::Push(char c){
     top = newNode;
 }
 
-char Stack::Pop(){
+char Stack::Pop(){ // removes item from top of stack 
     char c = 'A';
     StackNodePtr del; 
 
@@ -37,11 +44,11 @@ char Stack::Pop(){
     return c;
 }
 
-bool Stack::IsEmpty(){
+bool Stack::IsEmpty(){ // returns value if top = NULL
     return top == NULL;
 }
 
-void Stack::Print(){
+void Stack::Print(){ //iterate through stack and print values 
     StackNodePtr p = top;
 
     cout << "{ ";
@@ -51,4 +58,15 @@ void Stack::Print(){
     }
     cout << "}";
 
+}
+
+char Stack::Peek(){ // returns info from top item of stack 
+    if(top == NULL){
+        cout << "error" << endl;
+        return 'Z';
+    }
+    else{
+        return top-> info;
+    }
+    
 }

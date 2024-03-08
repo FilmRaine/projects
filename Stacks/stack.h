@@ -1,6 +1,10 @@
-//Prototypes 
-
 /* stack.h
+ *
+ * CS 121.Bolden...........Jackson Staples
+ * 3/8/2024 .................stap2053@vandals.uidaho.edu
+ *
+ * Header file 
+ *---------------------------------------------------------------------
 */
 #ifndef STACK_H
 #define STACK_H
@@ -18,6 +22,7 @@ class Stack
         char Pop();
         bool IsEmpty();
         void Print();
+        char Peek();
     private:
         struct stackNode
         {
