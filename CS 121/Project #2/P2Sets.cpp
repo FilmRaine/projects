@@ -72,9 +72,8 @@ string temp;
 infile.open(filename.c_str());
     
  while(infile >> temp){
-
     if(!searchlist(head, temp)){   
-    appendtolist(head, temp);
+        appendtolist(head, temp);
         }
     }
     infile.close();
@@ -104,6 +103,7 @@ void appendtolist(Node*& head, string newData){
         head = p;
     }else{
         p-> next = head;
+        head = p;
     }
 }
 
