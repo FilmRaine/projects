@@ -3,7 +3,8 @@
  * CS 121.Bolden.........Jackson Staples
  * 2/12/2024.............stap2053@vandals.uidaho.edu
  *
- * Brief description of program and objective.
+ * Program to take input of two text files, turn their contents into linked lists,
+ * Then find the Union and Intersection between them. 
  *---------------------------------------------------------------------
  */
 
@@ -26,7 +27,7 @@ void printlist(Node*); // displays full list
 void readfile(Node*&, string); // reads in file 
 Node* findUnion(Node*&, Node*&);
 string alphanum(string);
-bool isAlpha(char);
+bool isLetter(char);
 void appendtolist(Node*&, string);
 bool isMember(Node*&, string);
 void removeNode(Node*&, string);
@@ -79,14 +80,14 @@ infile.open(filename.c_str());
 string alphanum(string stringMem){
     string buffer;
     for(char c : stringMem){
-        if(isAlpha(c)){
+        if(isLetter(c)){
             buffer += c;
         }
     }
     return buffer;
 }
 
-bool isAlpha(char temp){
+bool isLetter(char temp){
     if((temp >= 'a' && temp <= 'z') || (temp >= 'A' && temp <= 'Z') || temp == '-'  || temp == '\''){
         return true;
     }
