@@ -3,7 +3,7 @@
  * CS 121.Bolden...........Jackson Staples
  * 4/10/2024 .................stap2053@vandals.uidaho.edu
  *
- * Header file 
+ * interface file
  *---------------------------------------------------------------------
 */
 
@@ -16,5 +16,15 @@
 class queue
 {
     public:
-    
+        void Dequeue();
+        void Enqueue();    
+    private:
+        struct mazeQueue
+        {
+           // remember! you can copy over the stack class for this
+           // don't create extra work for yourself. 
+           // change push to add to back, and then rename stuff
+           // so you don't get lost. 
+        }
 };
+#endif
