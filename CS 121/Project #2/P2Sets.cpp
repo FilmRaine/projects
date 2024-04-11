@@ -3,7 +3,12 @@
  * CS 121.Bolden.........Jackson Staples
  * 2/12/2024.............stap2053@vandals.uidaho.edu
  *
+<<<<<<< HEAD
  * Program designed to take two text files as input for data in a linked list, then print the intersection and union of both the linked lists.
+=======
+ * Program to take input of two text files, turn their contents into linked lists,
+ * Then find the Union and Intersection between them. 
+>>>>>>> refs/remotes/origin/main
  *---------------------------------------------------------------------
  */
 
@@ -24,12 +29,21 @@ Node* findintersection(Node*&, Node*&);// find intersection betweeen linked list
 Node* addlists(Node*&, Node*&); // Combines two linked lists
 void printlist(Node*); // displays full list 
 void readfile(Node*&, string); // reads in file 
+<<<<<<< HEAD
 Node* findUnion(Node*&, Node*&); // Finds union between linked lists
 string alphanum(string); // Removes all aplhanumerical characters, except hypens and single apostrophes. 
 bool isAlpha(char); 
 void appendtolist(Node*&, string); // adds string as data memeber of linked list
 bool searchlist(Node*&, string); // Checks if string passed to function is a member of data from the list passed to function.
 void removeNode(Node*&, string); // Removes node if data of passed function matches string passed to function.
+=======
+Node* findUnion(Node*&, Node*&);
+string alphanum(string);
+bool isLetter(char);
+void appendtolist(Node*&, string);
+bool isMember(Node*&, string);
+void removeNode(Node*&, string);
+>>>>>>> refs/remotes/origin/main
 
 
 
@@ -78,8 +92,12 @@ infile.open(filename.c_str());
     
  while(infile >> temp){
     temp = alphanum(temp);
+<<<<<<< HEAD
     // Adds string to list if not already a member
     if(!searchlist(head, temp)){   
+=======
+    if(!isMember(head, temp)){   
+>>>>>>> refs/remotes/origin/main
     appendtolist(head, temp);
         }
     }
@@ -91,14 +109,23 @@ string alphanum(string stringMem){
     
     // Iterate through list
     for(char c : stringMem){
+<<<<<<< HEAD
         if(isAlpha(c)){ 
             buffer += c; // Writes strings to buffer ignoring alphanumerics
+=======
+        if(isLetter(c)){
+            buffer += c;
+>>>>>>> refs/remotes/origin/main
         }
     }
     return buffer;
 }
 
+<<<<<<< HEAD
 bool isAlpha(char temp){ // Returns true value if char is alpha, hyphen or single apostrophe
+=======
+bool isLetter(char temp){
+>>>>>>> refs/remotes/origin/main
     if((temp >= 'a' && temp <= 'z') || (temp >= 'A' && temp <= 'Z') || temp == '-'  || temp == '\''){
         return true;
     }
@@ -134,8 +161,12 @@ void appendtolist(Node*& head, string newData){
     }
 }
 
+<<<<<<< HEAD
 bool searchlist(Node*& head, string search){
    // start of list
+=======
+bool isMember(Node*& head, string search){
+>>>>>>> refs/remotes/origin/main
     Node* p = head;
 
     // iterate through list
@@ -156,8 +187,12 @@ Node* findintersection(Node*& L1Head, Node*& L2Head){
 
     while(p != NULL){
         search = p -> data;
+<<<<<<< HEAD
         // if string is in L1 & L2, add to intersect
         if(searchlist(L2Head, search)){
+=======
+        if(isMember(S2Head, search)){
+>>>>>>> refs/remotes/origin/main
             appendtolist(intersect, search);
         }
         p = p-> next; 
@@ -169,7 +204,12 @@ Node* addlists(Node*& L1Head, Node*& L2Head){
     Node* Union = NULL;
     Node* p = L1Head;
 
+<<<<<<< HEAD
     while(p != NULL){ // Adds data from L1 to Union
+=======
+
+    while(p != NULL){
+>>>>>>> refs/remotes/origin/main
         appendtolist(Union, p -> data);
         p = p-> next;
     }
@@ -187,7 +227,14 @@ void removeNode(Node*& head, string search){
     // Beginning of list
     Node* p = head;
 
+<<<<<<< HEAD
     // Check first member of list
+=======
+if(head == NULL){
+    cout << "Head is NULL.\n" << endl;
+    return;
+   }
+>>>>>>> refs/remotes/origin/main
     if(p -> data == search){
         // Move to next node
         head = p -> next;
@@ -218,7 +265,12 @@ void removeNode(Node*& head, string search){
 Node* findUnion(Node*& intersect, Node*& Union){ 
     Node* p = intersect;
     string search;
+<<<<<<< HEAD
     while(p != NULL){ // Iterate through Union, removing single nodes if they match 1 intersect
+=======
+
+    while(p != NULL){
+>>>>>>> refs/remotes/origin/main
         search = p-> data;
         removeNode(Union, search);
         p=p-> next;
