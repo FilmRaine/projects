@@ -17,10 +17,11 @@
 using namespace std;
 
 
-void Queue::Enqueue(){
-    MazeQueuePtr newNode = new MazeQueue;
+void Queue::Enqueue(int x){
+    MazeQueuePtr n = new MazeQueue;
 
-    n-> info = x;
-    n-> next = NULL;
-    count++;
+    n->size = x;
+    n->next = NULL;
+
+    if(head ==)
 }
